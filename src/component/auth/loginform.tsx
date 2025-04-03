@@ -5,6 +5,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaAsterisk } from "react-icons/fa";
 import Link from "next/link";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "@/api/auth";
+// import { Mutation } from './../../../node_modules/@tanstack/query-core/src/mutation';
+
 const LoginForm = () => {
   const {
     register,
@@ -16,11 +20,23 @@ const LoginForm = () => {
       password: "",
     },
     resolver: yupResolver(loginSchema),
+    mode: "all",
   });
   console.log(errors);
-  // console.log(watch("email"));
-  const onSubmit: SubmitHandler<ILogin> = (data) => {
+
+  // {mutate, error, isPending}= useMutation({
+  const { mutate, error, isPending } = useMutation({
+    mutationFn: login,
+    onSuccess: (response) => {
+      console.log("response", response);
+    },
+    // },
+  });
+  // })
+
+  const onSubmit: SubmitHandler<ILogin> = async (data) => {
     console.log(data);
+    await mutate(data);
   };
 
   return (

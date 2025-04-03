@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import LoginPage from "../../component/loginform";
+// import LoginPage from "../../component/auth/loginform";
+import LoginForm from "@/component/auth/loginform";
 const Page = () => {
   return (
     <div className="  flex justify-center items-center inset-shadow-sm ">
@@ -8,7 +9,7 @@ const Page = () => {
         <h1 className="text-3xl font-bold tracking-wider inline-block items-center ">
           Login
         </h1>
-        <LoginPage />
+        <LoginForm />
         <div>
           <p>
             don&apos;t have an account?{" "}
