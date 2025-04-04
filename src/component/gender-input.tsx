@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+"use client";
 import React from "react";
-import Select from "react-select";
+import dynamic from "next/dynamic";
+// import Select from "react-select";
+const Select = dynamic(() => import("react-select"), { ssr: false });
+
 import { Controller } from "react-hook-form";
 // import selection from './../app/selection/selection
 interface IProps {
@@ -17,11 +22,12 @@ const SelectGenader: React.FC<IProps> = ({ control }) => {
     <>
       <Controller
         name="gender"
+        defaultValue={null}
         control={control}
-        render={({ field }) => {
+        render={({ field: { value, ...others } }) => {
           return (
             <section>
-              <Select {...field} options={options} />
+              <Select {...others} options={options} />
             </section>
           );
         }}

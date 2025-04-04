@@ -4,11 +4,11 @@ export interface ILogin {
 }
 
 export interface ISignUp {
-  firstname: string;
-  Lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
-  phonenumber: string;
+  phoneNumber: string;
   conformPassword: string;
   gender?: {
     label?: string;

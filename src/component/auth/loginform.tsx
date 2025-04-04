@@ -25,14 +25,14 @@ const LoginForm = () => {
   console.log(errors);
 
   // {mutate, error, isPending}= useMutation({
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: login,
     onSuccess: (response) => {
       console.log("response", response);
-      toast.success("login sucessfull");
+      toast.success(response.data.message);
     },
     onError: () => {
-      toast.error("login faield");
+      toast.error("login failed");
     },
     // },
   });
@@ -100,7 +100,8 @@ const LoginForm = () => {
           </p>
           <div className="Button flex justify-center">
             <button
-              className="border bg-black text-white p-3 w-full rounded-2xl text-1xl cursor-pointer"
+              disabled={isPending}
+              className="border bg-black text-white p-3 w-full rounded-2xl text-1xl cursor-pointer disabled:cursor-not-allowed disabled:bg-black"
               type="submit"
             >
               Login

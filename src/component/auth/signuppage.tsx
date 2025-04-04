@@ -19,11 +19,11 @@ const SignupPage = () => {
     formState: { errors },
   } = useForm<ISignUp>({
     defaultValues: {
-      firstname: "",
-      Lastname: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
-      phonenumber: "",
+      phoneNumber: "",
       conformPassword: "",
       gender: {},
     },
@@ -32,14 +32,14 @@ const SignupPage = () => {
   });
   console.log(errors);
   // {mutate, error, isPending}= useMutation({
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: Sign,
     onSuccess: (response) => {
       console.log("response", response);
-      toast.success("Signup sucessfull");
+      toast.success(response.data.message);
     },
-    onError: () => {
-      toast.error("Signup faield");
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
   const onSubmit: SubmitHandler<ISignUp> = async (data) => {
@@ -67,41 +67,41 @@ const SignupPage = () => {
             </label>
             <div className="w-full">
               <input
-                {...register("firstname")}
+                {...register("firstName")}
                 type="text"
                 className={`border rounded-2xl pt-2 pb-2 pl-1 w-full${
-                  errors.firstname
+                  errors.firstName
                     ? "text-red-500 border-red-500"
                     : "text-black border-gray-500"
                 }`}
                 placeholder="Enter Username"
               />
-              {errors?.firstname && (
+              {errors?.firstName && (
                 <p className="text-xs text-red-500">
-                  {errors?.firstname.message}
+                  {errors?.firstName.message}
                 </p>
               )}
             </div>
           </div>
           <div className="mt-10">
-            <label htmlFor="Lastname" className=" flex ml-3">
-              User Lastname <FaAsterisk className="text-xs text-red-500" />
+            <label htmlFor="lastName" className=" flex ml-3">
+              User lastName <FaAsterisk className="text-xs text-red-500" />
             </label>
             <div>
               <input
-                {...register("Lastname")}
+                {...register("lastName")}
                 type="text"
-                name="Lastname"
+                name="lastName"
                 className={`border rounded-2xl pt-2 pb-2 pl-1 w-full${
-                  errors.Lastname
+                  errors.lastName
                     ? "text-red-500 border-red-500"
                     : "text-black border-gray-500"
                 }`}
-                placeholder="Enter UserLastname"
+                placeholder="Enter UserlastName"
               />
-              {errors?.Lastname && (
+              {errors?.lastName && (
                 <p className="text-xs text-red-500">
-                  {errors?.Lastname.message}
+                  {errors?.lastName.message}
                 </p>
               )}
             </div>
@@ -176,30 +176,31 @@ const SignupPage = () => {
             <SelectGenader control={control} />
           </div>
           <div className="mt-4">
-            <label htmlFor="phonenumber" className="flex ml-3">
-              phonenumber <FaAsterisk className="text-xs text-red-500" />
+            <label htmlFor="phoneNumber" className="flex ml-3">
+              phoneNumber <FaAsterisk className="text-xs text-red-500" />
             </label>
             <input
-              {...register("phonenumber")}
-              name="phonenumber"
+              {...register("phoneNumber")}
+              name="phoneNumber"
               className={` border rounded-2xl pt-2 pb-2 text-black pl-1 w-full${
-                errors.phonenumber
+                errors.phoneNumber
                   ? "text-red-500 border-red-500"
                   : "text-black border-gray-500"
               }`}
               placeholder="Enter your phone number:"
             />
-            {errors?.phonenumber && (
+            {errors?.phoneNumber && (
               <p className="text-xs text-red-500">
-                {errors?.phonenumber.message}
+                {errors?.phoneNumber.message}
               </p>
             )}
           </div>
         </div>
         <div className="mt-4">
           <button
+            disabled={isPending}
             type="submit"
-            className=" bg-blue-500 text-white text-2xl w-full rounded-2xl pt-2 pb-2 cursor-pointer "
+            className=" bg-blue-500 text-white text-2xl w-full rounded-2xl pt-2 pb-2 cursor-pointer disabled:cursor-not-allowed "
           >
             Submit
           </button>
