@@ -1,3 +1,4 @@
+"use client";
 import SignupPage from "@/component/auth/signuppage";
 
 const signUp = () => {
