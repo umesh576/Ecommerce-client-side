@@ -5,8 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaAsterisk } from "react-icons/fa";
-import SelectGenader from "./gender-input";
+import SelectGenader from "../gender-input";
+import { useMutation } from "@tanstack/react-query";
 // import Control from "./../../node_modules/reat-select/dist/declarations/src/components/Control.d";
+import { Sign } from "./../../api/sign";
+import toast from "react-hot-toast";
 
 const SignupPage = () => {
   const {
@@ -28,7 +31,19 @@ const SignupPage = () => {
     mode: "all",
   });
   console.log(errors);
-  const onSubmit: SubmitHandler<ISignUp> = (data) => {
+  // {mutate, error, isPending}= useMutation({
+  const { mutate } = useMutation({
+    mutationFn: Sign,
+    onSuccess: (response) => {
+      console.log("response", response);
+      toast.success("Signup sucessfull");
+    },
+    onError: () => {
+      toast.error("Signup faield");
+    },
+  });
+  const onSubmit: SubmitHandler<ISignUp> = async (data) => {
+    await mutate(data);
     console.log(data);
   };
 

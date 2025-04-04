@@ -7,7 +7,7 @@ import { FaAsterisk } from "react-icons/fa";
 import Link from "next/link";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "@/api/auth";
-// import { Mutation } from './../../../node_modules/@tanstack/query-core/src/mutation';
+import toast from "react-hot-toast";
 
 const LoginForm = () => {
   const {
@@ -25,10 +25,14 @@ const LoginForm = () => {
   console.log(errors);
 
   // {mutate, error, isPending}= useMutation({
-  const { mutate, error, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: login,
     onSuccess: (response) => {
       console.log("response", response);
+      toast.success("login sucessfull");
+    },
+    onError: () => {
+      toast.error("login faield");
     },
     // },
   });
