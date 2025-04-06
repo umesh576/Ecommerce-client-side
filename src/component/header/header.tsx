@@ -34,6 +34,9 @@ const Header = () => {
               <Link href="/contact">Contact Us</Link>
             </li>
             <li>
+              <Link href="/cart">Cart</Link>
+            </li>
+            <li>
               <Link href="/login">Login</Link>
             </li>
             <li>

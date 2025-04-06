@@ -1,8 +1,12 @@
+import ProductCard from "@/component/product/product-card";
+import CartPage from "@/component/cart/cart";
+
 export default function Home() {
   return (
     <main>
       <div>
-        <h1>Home</h1>
+        <ProductCard />
+        <CartPage />
       </div>
     </main>
   );
