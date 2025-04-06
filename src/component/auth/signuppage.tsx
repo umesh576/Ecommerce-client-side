@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { ISignUp } from "@/interface/auth.interface";
 import { signupSchema } from "@/schemas/signup.schema";
@@ -10,6 +12,7 @@ import { useMutation } from "@tanstack/react-query";
 // import Control from "./../../node_modules/reat-select/dist/declarations/src/components/Control.d";
 import { Sign } from "./../../api/sign";
 import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 
 const SignupPage = () => {
   const {
@@ -32,14 +35,14 @@ const SignupPage = () => {
   });
   console.log(errors);
   // {mutate, error, isPending}= useMutation({
-  const { mutate, isPending } = useMutation({
+  const { mutate, error, isPending } = useMutation({
     mutationFn: Sign,
     onSuccess: (response) => {
       console.log("response", response);
       toast.success(response.data.message);
     },
-    onError: (error) => {
-      toast.error(error.message);
+    onError: (error: any) => {
+      toast.error(error?.response.data.message ?? "request faild");
     },
   });
   const onSubmit: SubmitHandler<ISignUp> = async (data) => {

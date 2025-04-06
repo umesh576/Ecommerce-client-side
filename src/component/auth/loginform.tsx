@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { ILogin } from "@/interface/auth.interface";
 import { loginSchema } from "@/schemas/login.schema";
@@ -25,14 +27,14 @@ const LoginForm = () => {
   console.log(errors);
 
   // {mutate, error, isPending}= useMutation({
-  const { mutate, isPending } = useMutation({
+  const { mutate, error, isPending } = useMutation({
     mutationFn: login,
     onSuccess: (response) => {
       console.log("response", response);
       toast.success(response.data.message);
     },
-    onError: () => {
-      toast.error("login failed");
+    onError: (error: any) => {
+      toast.error(error.response.data.message ?? "login failed");
     },
     // },
   });
