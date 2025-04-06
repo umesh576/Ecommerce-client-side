@@ -1,47 +1,10 @@
 "use client"; // If you're using App Router
 import Image from "next/image";
-import Head from "next/head";
 
 export default function CartPage() {
   return (
     <>
-      <Head>
-        <title>Shopping Cart | Your Store</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          rel="stylesheet"
-        />
-      </Head>
-
       <div className="min-h-screen bg-gray-50 font-[Inter]">
-        {/* Navbar */}
-        <nav className="bg-white border-b">
-          <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-16">
-              <div className="flex">
-                <div className="flex-shrink-0 flex items-center">
-                  <Image
-                    src="/logo_placeholder.png"
-                    alt="Logo"
-                    width={32}
-                    height={32}
-                  />
-                </div>
-              </div>
-              <div className="flex items-center">
-                <a href="#" className="text-gray-500 hover:text-black">
-                  <i className="far fa-user text-lg"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </nav>
-
         {/* Main content */}
         <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="lg:grid lg:grid-cols-12 lg:gap-x-12">
@@ -62,31 +25,17 @@ export default function CartPage() {
                       image:
                         "https://creatie.ai/ai/api/search-image?query=A%20premium%20wireless%20headphone...&width=200&height=200",
                     },
-                    {
-                      name: "Smart Watch Pro",
-                      desc: "Black | 44mm",
-                      qty: 2,
-                      price: 399.99,
-                      image:
-                        "https://creatie.ai/ai/api/search-image?query=A%20sleek%20smartwatch...&width=200&height=200",
-                    },
-                    {
-                      name: "Leather Wallet",
-                      desc: "Brown | Genuine Leather",
-                      qty: 1,
-                      price: 79.99,
-                      image:
-                        "https://creatie.ai/ai/api/search-image?query=A%20premium%20leather%20wallet...&width=200&height=200",
-                    },
                   ].map((item, i) => (
                     <div
                       key={i}
                       className="bg-white shadow-sm rounded-lg p-6 flex items-start space-x-6"
                     >
-                      <img
-                        src={item.image}
-                        alt={item.name}
+                      <Image
                         className="w-24 h-24 object-cover rounded-md"
+                        height={500}
+                        width={500}
+                        src="/logo1.png"
+                        alt="Logo"
                       />
                       <div className="flex-1 space-y-4">
                         <div className="flex justify-between">
@@ -168,62 +117,6 @@ export default function CartPage() {
             </div>
           </div>
         </main>
-
-        {/* Footer */}
-        <footer className="bg-white border-t mt-24">
-          <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div>
-                <Image
-                  src="/logo_placeholder.png"
-                  alt="Logo"
-                  width={32}
-                  height={32}
-                />
-                <p className="mt-4 text-sm text-gray-500">
-                  Making commerce better for everyone.
-                </p>
-              </div>
-              {[
-                {
-                  title: "Shop",
-                  links: ["New Arrivals", "Best Sellers", "Sale"],
-                },
-                {
-                  title: "Support",
-                  links: ["Contact Us", "Shipping", "Returns"],
-                },
-                {
-                  title: "Company",
-                  links: ["About Us", "Privacy Policy", "Terms of Service"],
-                },
-              ].map((section, i) => (
-                <div key={i}>
-                  <h3 className="text-sm font-medium text-gray-900">
-                    {section.title}
-                  </h3>
-                  <ul className="mt-4 space-y-4">
-                    {section.links.map((link, j) => (
-                      <li key={j}>
-                        <a
-                          href="#"
-                          className="text-sm text-gray-500 hover:text-black"
-                        >
-                          {link}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-            <div className="mt-12 border-t pt-8 text-center">
-              <p className="text-sm text-gray-500">
-                &copy; 2024 Your Store. All rights reserved.
-              </p>
-            </div>
-          </div>
-        </footer>
       </div>
     </>
   );

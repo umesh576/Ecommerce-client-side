@@ -4,6 +4,7 @@ import React from "react";
 import Footer from "./footer/footer";
 import Header from "./header/header";
 import { usePathname } from "next/navigation";
+// import CartPage from "./cart/cart";
 
 interface IProps {
   children: React.ReactNode;
@@ -11,7 +12,8 @@ interface IProps {
 
 const Layout: React.FC<IProps> = ({ children }) => {
   const pathname = usePathname();
-  const hideNav = pathname === "/login" || pathname === "/signup";
+  const hideNav =
+    pathname === "/login" || pathname === "/cart" || pathname === "/signup";
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -20,6 +22,7 @@ const Layout: React.FC<IProps> = ({ children }) => {
           <Header />
         </div>
       )}
+
       <div className="flex-grow">{children}</div>
       {/* footer */}
       {!hideNav && <Footer />}
