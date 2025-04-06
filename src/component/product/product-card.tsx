@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 const ProductCard = () => {
   const products = [
@@ -24,7 +25,12 @@ const ProductCard = () => {
             {products.map((product, index) => (
               <div key={index} className="group relative">
                 <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                  <img src="mobile.jpg" alt="image" />
+                  <Image
+                    height={1000}
+                    width={1000}
+                    src="mobile.jpg"
+                    alt="image"
+                  />
                 </div>
                 <div className="mt-4 flex justify-between">
                   <div>
