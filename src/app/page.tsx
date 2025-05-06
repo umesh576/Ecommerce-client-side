@@ -1,5 +1,5 @@
-import ProductCard from "@/component/product/product-card";
-import CartPage from "@/component/cart-page/cartPage";
+// import ProductCard from "@/component/product/product-card";
+// import CartPage from "@/component/cart-page/cartPage";
 import HeroPage from "@/component/home/hero";
 import TrendingProduct from "@/component/home/productList/mostSale";
 import SummerSale from "@/component/home/productList/SummerSale";
@@ -10,8 +10,8 @@ export default function Home() {
         <HeroPage />
         <TrendingProduct />
         <SummerSale />
-        <ProductCard />
-        <CartPage />
+        {/* <ProductCard /> */}
+        {/* <CartPage /> */}
       </div>
     </main>
   );

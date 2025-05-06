@@ -4,6 +4,8 @@ import "./globals.css";
 import Provider from "@/providers/provider";
 import Layout from "@/component/layout";
 import { Toaster } from "react-hot-toast";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

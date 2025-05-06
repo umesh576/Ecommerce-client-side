@@ -1,10 +1,26 @@
 import React from "react";
 import ProductList from "../productList";
-
 const SummerSale = () => {
+  const Products = [
+    {
+      image: "/logo1",
+      name: "Summer sale product",
+      price: 230,
+    },
+    {
+      image: "/logo1",
+      name: "Summer sale product",
+      price: 230,
+    },
+    {
+      image: "/logo1",
+      name: "Summer sale product",
+      price: 230,
+    },
+  ];
   return (
     <div>
-      <ProductList title="Summer Sale" products={[]} />
+      <ProductList title="Summer Sale" isLoading={false} products={Products} />
     </div>
   );
 };

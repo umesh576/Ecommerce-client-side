@@ -16,10 +16,10 @@ const HeroPage = () => {
       <div className="absolute inset-0 bg-black/20"></div>
       <div className="absolute z-50 max-w-[700px] top-1/3 px-7">
         <div className="tracking-wider">
+          <h1 className="text-5xl font-bold">
+            Welcome to <span className="animate-pulse ">Doko bazzar</span>
+          </h1>
           <p className=" text-2xl">
-            <h1 className="text-5xl font-bold">
-              Welcome to <span className="animate-pulse ">Doko bazzar</span>
-            </h1>
             Discover top-quality products, exclusive deals, and a shopping
             experience designed just for you. Whether you are looking for the
             latest trends, everyday essentials, or unique finds, we got

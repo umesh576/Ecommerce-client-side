@@ -11,7 +11,10 @@ import { useMutation } from "@tanstack/react-query";
 import { login } from "@/api/auth";
 import toast from "react-hot-toast";
 
+import { useRouter } from "next/navigation";
+
 const LoginForm = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -32,6 +35,7 @@ const LoginForm = () => {
     onSuccess: (response) => {
       console.log("response", response);
       toast.success(response.data.message);
+      router.replace("/");
     },
     onError: (error: any) => {
       toast.error(error.response.data.message ?? "login failed");

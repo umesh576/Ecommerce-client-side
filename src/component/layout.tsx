@@ -23,7 +23,7 @@ const Layout: React.FC<IProps> = ({ children }) => {
         </div>
       )}
 
-      <div className="flex-grow">{children}</div>
+      <div className="flex-grow mb-10">{children}</div>
       {/* footer */}
       {!hideNav && <Footer />}
     </div>

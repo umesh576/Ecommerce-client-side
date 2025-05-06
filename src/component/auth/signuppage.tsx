@@ -13,8 +13,10 @@ import { useMutation } from "@tanstack/react-query";
 import { Sign } from "./../../api/sign";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 
 const SignupPage = () => {
+  const router = useRouter();
   const {
     control,
     register,
@@ -40,6 +42,7 @@ const SignupPage = () => {
     onSuccess: (response) => {
       console.log("response", response);
       toast.success(response.data.message);
+      router.replace("/login");
     },
     onError: (error: any) => {
       toast.error(error?.response.data.message ?? "request faild");
