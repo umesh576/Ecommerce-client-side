@@ -1,4 +1,4 @@
-import api from "@/axios/api.axios.api";
+import api from "@/axios/api.axios";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const getAllProduct = async () => {

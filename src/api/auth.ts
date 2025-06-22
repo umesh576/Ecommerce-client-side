@@ -1,4 +1,4 @@
-import api from "@/axios/api.axios.api";
+import api from "@/axios/api.axios";
 import { ILogin } from "@/interface/auth.interface";
 
 export const login = async (data: ILogin) => {

@@ -1,4 +1,4 @@
-import api from "@/axios/api.axios.api";
+import api from "@/axios/api.axios";
 import { ISignUp } from "@/interface/auth.interface";
 
 export const Sign = async (data: ISignUp) => {

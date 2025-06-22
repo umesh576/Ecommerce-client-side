@@ -1,22 +1,19 @@
-// import React, { useEffect } from "react";
-// import { getProductById } from "@/api/product";
-// import { useQuery } from "@tanstack/react-query";
+import ProductDetail from "@/components/product/product-card";
+import React from "react";
 
-import ProductDetails from "@/component/product-details";
-
-interface IPros {
-  params: {
+interface IProps {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
-const DynamicProduct: React.FC<IPros> = async ({ params }) => {
+
+const Page: React.FC<IProps> = async ({ params }) => {
   const { id } = await params;
-  console.log("id", id);
   return (
-    <div>
-      <ProductDetails id={id} />
+    <div className="w-full lg:max-w-[1440px] lg:mx-auto">
+      <ProductDetail id={id} />
     </div>
   );
 };
 
-export default DynamicProduct;
+export default Page;
