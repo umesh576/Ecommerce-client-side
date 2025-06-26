@@ -26,14 +26,14 @@ const Header = () => {
           </Link>
         </div>
         <div>
-          <Link href={"/contact-us"}>
+          <Link href={"/contact"}>
             <p className=" transition-all duration-300 hover:text-blue-600 font-semibold">
               Contact Us
             </p>
           </Link>
         </div>
         <div>
-          <Link href={"/about-us"}>
+          <Link href={"/aboutus"}>
             <p className=" transition-all duration-300 hover:text-blue-600 font-semibold">
               About Us
             </p>
@@ -81,7 +81,7 @@ const Header = () => {
               Login
             </button>
           </Link>
-          <Link href="/sign-up">
+          <Link href="/signup">
             <button className="cursor-pointer text-lg font-semibold bg-blue-500  text-white px-3 py-2 min-w-[100px] rounded-md ">
               Register
             </button>
