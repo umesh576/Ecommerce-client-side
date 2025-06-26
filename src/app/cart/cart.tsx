@@ -1,10 +1,12 @@
+import CartComponent from "@/component/cart-page/cartPage";
 import React from "react";
-import CartPage from "@/component/cart-page/cartPage";
 
-export const Cart = () => {
+const Page = () => {
   return (
-    <div className="  flex justify-center items-center inset-shadow-sm ">
-      <CartPage />
+    <div>
+      <CartComponent />
     </div>
   );
 };
+
+export default Page;

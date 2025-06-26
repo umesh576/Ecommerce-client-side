@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { ISignUp } from "@/interface/auth.interface";
+// import { ISignUp } from "@/interface/auth.interface";
+import { ISignUp } from "@/interface/auth/auth.interface";
 import { signupSchema } from "@/schemas/signup.schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";

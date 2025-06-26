@@ -2,9 +2,10 @@
 "use client";
 
 import React, { useEffect } from "react";
-import ProductList from "../productList";
+import ProductList from "../products-list";
 import { useQuery } from "@tanstack/react-query";
-import { getAllProduct } from "@/api/product";
+// import { getAllProduct } from "@/api/product";
+import { getAllProducts } from "@/api/product";
 import toast from "react-hot-toast";
 
 const products = [
@@ -30,14 +31,14 @@ const products = [
 const TrendingProduct = () => {
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["trending-products"],
-    queryFn: getAllProduct,
+    queryFn: getAllProducts,
   });
   console.log("trending", data, isPending);
   useEffect(() => {
     if (isError) {
       toast.error(error?.message || "something went wrong");
     }
-  }, [error]);
+  }, [error, isError]);
   return (
     <div>
       {

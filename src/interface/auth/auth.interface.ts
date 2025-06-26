@@ -9,9 +9,9 @@ export interface ISignUp {
   email: string;
   password: string;
   phoneNumber: string;
-  conformPassword: string;
   gender?: {
-    label?: string;
+    lable?: string;
     value?: string;
   };
+  conformPassword: string;
 }

@@ -1,123 +1,116 @@
-"use client"; // If you're using App Router
-import Image from "next/image";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 
-export default function CartPage() {
-  return (
-    <>
-      <div className="min-h-screen bg-gray-50 font-[Inter]">
-        {/* Main content */}
-        <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-x-12">
-            {/* Cart Items */}
-            <div className="lg:col-span-8">
-              <div className="space-y-8">
-                <h1 className="text-2xl font-semibold text-gray-900">
-                  Shopping Cart (3)
-                </h1>
+import { deleteCart, getCart, removeItemFromCart } from "@/api/cart";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import OrderSummary from "./orderSummary";
+import ItemsDetails from "./item.details";
+import { useAuth } from "@/context/auth.content";
 
-                <div className="space-y-6">
-                  {[
-                    {
-                      name: "Premium Wireless Headphones",
-                      desc: "White | Bluetooth 5.0",
-                      qty: 1,
-                      price: 299.99,
-                      image:
-                        "https://creatie.ai/ai/api/search-image?query=A%20premium%20wireless%20headphone...&width=200&height=200",
-                    },
-                  ].map((item, i) => (
-                    <div
-                      key={i}
-                      className="bg-white shadow-sm rounded-lg p-6 flex items-start space-x-6"
-                    >
-                      <Image
-                        className="w-24 h-24 object-cover rounded-md"
-                        height={500}
-                        width={500}
-                        src="/logo1.png"
-                        alt="Logo"
-                      />
-                      <div className="flex-1 space-y-4">
-                        <div className="flex justify-between">
-                          <div>
-                            <h3 className="text-lg font-medium text-gray-900">
-                              {item.name}
-                            </h3>
-                            <p className="text-sm text-gray-500">{item.desc}</p>
-                          </div>
-                          <button className="text-gray-400 hover:text-red-500">
-                            <i className="far fa-trash-alt"></i>
-                          </button>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <div className="flex items-center space-x-3">
-                            <button className="w-8 h-8 border border-gray-300 text-gray-600 hover:border-black rounded">
-                              -
-                            </button>
-                            <span className="text-gray-900">{item.qty}</span>
-                            <button className="w-8 h-8 border border-gray-300 text-gray-600 hover:border-black rounded">
-                              +
-                            </button>
-                          </div>
-                          <span className="text-lg font-medium text-gray-900">
-                            ${item.price.toFixed(2)}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+const CartComponent = () => {
+  const { user } = useAuth();
+  const [total, setTotal] = useState(0);
 
-            {/* Order Summary */}
-            <div className="lg:col-span-4 mt-12 lg:mt-0">
-              <div className="bg-white shadow-sm rounded-lg p-6 space-y-6 sticky top-6">
-                <h2 className="text-lg font-medium text-gray-900">
-                  Order Summary
-                </h2>
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["get-cart-items", user?._id],
+    queryFn: () => getCart(user?._id),
+    enabled: !!user?._id,
+  });
 
-                <div className="space-y-4 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Subtotal</span>
-                    <span className="text-gray-900">$779.97</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Shipping</span>
-                    <span className="text-gray-900">$9.99</span>
-                  </div>
-                  <div className="pt-4 border-t">
-                    <div className="flex justify-between text-base font-medium text-gray-900">
-                      <span>Total</span>
-                      <span>$789.96</span>
-                    </div>
-                  </div>
-                </div>
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const cartItems = data?.data?.items || [];
 
-                <div className="flex space-x-4">
-                  <input
-                    type="text"
-                    placeholder="Discount code"
-                    className="flex-1 rounded border-gray-300 focus:border-black focus:ring-black"
-                  />
-                  <button className="bg-black px-4 py-2 text-white rounded hover:bg-opacity-90">
-                    Apply
-                  </button>
-                </div>
+  //  total price
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      const cartTotal = cartItems.reduce((sum: number, item: any) => {
+        const price = Number(item?.product?.price) || 0;
+        const quantity = Number(item?.quantity) || 0;
+        return sum + price * quantity;
+      }, 0);
+      setTotal(cartTotal);
+    } else {
+      setTotal(0);
+    }
+  }, [cartItems]);
 
-                <div className="space-y-4">
-                  <button className="w-full bg-black py-3 text-white rounded hover:bg-opacity-90">
-                    Proceed to Checkout
-                  </button>
-                  <button className="w-full bg-white py-3 text-black border border-black rounded hover:bg-gray-50">
-                    Continue Shopping
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
+  // Remove item from cart
+  const { mutate: removeItem } = useMutation({
+    mutationKey: ["remove-cart-item"],
+    mutationFn: removeItemFromCart,
+    onSuccess: () => {
+      toast.success("Product removed from cart");
+      refetch();
+    },
+    onError: () => {
+      toast.error("Something went wrong");
+    },
+  });
+
+  // Clear the entire cart
+  const { mutate: clearCart } = useMutation({
+    mutationKey: ["clear-cart"],
+    mutationFn: deleteCart,
+    onSuccess: () => {
+      toast.success("Cart deleted successfully");
+      refetch();
+    },
+    onError: () => {
+      toast.error("Something went wrong");
+    },
+  });
+
+  const handleRemoveItem = (productId: string) => {
+    removeItem(productId);
+  };
+
+  const handleClearCart = () => {
+    clearCart();
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-600"></div>
       </div>
-    </>
+    );
+  }
+
+  if (cartItems.length === 0) {
+    return (
+      <div className="container mx-auto px-4 py-16 text-center">
+        <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
+        <div className="bg-white p-8 rounded-lg shadow-sm">
+          <p className="text-lg text-gray-600 mb-6">Your cart is empty</p>
+          <Link href="/products">
+            <button className="px-6 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors duration-300">
+              Continue Shopping
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <h1 className="text-3xl font-bold mb-8">Your Cart</h1>
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Cart Items */}
+        <ItemsDetails
+          items={cartItems}
+          onRemoveItem={handleRemoveItem}
+          onClearCart={handleClearCart}
+        />
+
+        {/* Order Summary */}
+        <OrderSummary total={total} />
+      </div>
+    </div>
   );
-}
+};
+
+export default CartComponent;

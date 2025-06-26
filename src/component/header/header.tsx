@@ -4,7 +4,8 @@ import React from "react";
 import { CiHeart } from "react-icons/ci";
 import { BsCart3 } from "react-icons/bs";
 import { IoPersonOutline } from "react-icons/io5";
-import { useAuth } from "@/context/auth.context";
+// import { useAuth } from "@/context/auth.context";
+import { useAuth } from "@/context/auth.content";
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuth();

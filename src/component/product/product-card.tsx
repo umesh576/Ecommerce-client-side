@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { IProduct } from "@/interface/product.interface";
+import { IProduct } from "@/interface/auth/product.interface";
 import Link from "next/link";
 
 interface Iprop {
