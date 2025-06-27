@@ -13,7 +13,7 @@ import { useMutation } from "@tanstack/react-query";
 // import Control from "./../../node_modules/reat-select/dist/declarations/src/components/Control.d";
 import { Sign } from "./../../api/sign";
 import toast from "react-hot-toast";
-import { AxiosError } from "axios";
+// import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
 const SignupPage = () => {

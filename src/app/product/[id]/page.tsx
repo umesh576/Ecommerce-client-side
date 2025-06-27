@@ -1,5 +1,6 @@
 // import ProductDetail from "@/components/product/product-card";
-import ProductDetails from "@/component/product/product-details";
+// import ProductDetails from "@/component/product/product-details"
+import ProductDetails from "@/component/product/product-details/product-details";
 import React from "react";
 
 interface IProps {

@@ -18,11 +18,24 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const localUser = localStorage.getItem("user");
-    if (localUser && !user) {
-      setUser(() => JSON.parse(localUser));
+
+    try {
+      if (
+        localUser &&
+        localUser !== "undefined" &&
+        localUser.trim() !== "" &&
+        !user
+      ) {
+        const parsed = JSON.parse(localUser);
+        setUser(parsed);
+      }
+    } catch (error) {
+      console.error("Error parsing user from localStorage:", error);
+      localStorage.removeItem("user"); // clean up invalid value
     }
-    setIsAuthenticated(() => !!Cookies.get("access_token"));
-  }, [user]);
+
+    setIsAuthenticated(!!Cookies.get("access_token"));
+  }, []);
 
   const logout = () => {
     setUser(null);
