@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import { ILogin } from "@/interface/auth.interface";
+// import { ILogin } from "@/interface/auth.interface";
+import { ILogin } from "@/interface/auth/auth.interface";
 import { loginSchema } from "@/schemas/login.schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -35,6 +36,7 @@ const LoginForm = () => {
     onSuccess: (response) => {
       console.log("response", response);
       toast.success(response.data.message);
+      console.log("login sucessfully");
       router.replace("/");
     },
     onError: (error: any) => {
