@@ -28,7 +28,7 @@ const ProductCard: React.FC<IProp> = ({
             className="h-full w-full transition-all object-cover duration-300 hover:scale-[1.1]"
             height={1000}
             width={1000}
-            src={coverImage?.path}
+            src={coverImage?.path || "/public/hero-3.jpg"}
             alt={name}
           />
         </Link>

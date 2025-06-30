@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+"use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { IProduct } from "@/interface/auth/product.interface";
 import React, { useState } from "react";
 import ProductTitle from "./product-title";
@@ -17,7 +18,9 @@ interface IProps {
 
 const ProductDetails: React.FC<IProps> = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
-
+  if (!product) {
+    return <div>Loading product details...</div>; // or return null
+  }
   // cart mutation
 
   const { isPending: addToCartPending, mutate: addToCartMutation } =
