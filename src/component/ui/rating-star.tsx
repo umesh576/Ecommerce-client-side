@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 "use client";
 
 import { StarRating } from "react-flexible-star-rating";
-import React, { useEffect } from "react";
+import React from "react";
 
 interface IProp {
   rating: number;
@@ -11,23 +10,26 @@ interface IProp {
   edit?: boolean;
 }
 
+const roundToHalf = (value: number) => {
+  if (typeof value !== "number" || isNaN(value)) return 0;
+  return Math.round(value * 2) / 2;
+};
+
 export const RatingStar: React.FC<IProp> = ({
   rating,
   edit = false,
   onChange,
 }) => {
-  useEffect(() => {
-    console.log("render", rating);
-  }, [rating]);
+  const safeRating = roundToHalf(rating);
 
   return (
     <div className="flex">
       <StarRating
         isReadOnly={!edit}
         dimension={8}
-        initialRating={rating ?? 0}
+        initialRating={safeRating}
         isHalfRatingEnabled
-        onRatingChange={(newRating) => onChange && onChange(null, newRating)}
+        onRatingChange={(newRating) => onChange?.(null, newRating)}
       />
     </div>
   );

@@ -1,8 +1,11 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
+const Header = dynamic(() => import("./header/header"), { ssr: false });
+
 import Footer from "./footer/footer";
-import Header from "./header/header";
+// import Header frm "./header/header";
 import { usePathname } from "next/navigation";
 // import CartPage from "./cart/cart";
 
